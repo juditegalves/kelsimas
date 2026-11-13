@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Remove this block when Kely approves the site and it should appear on Google.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
