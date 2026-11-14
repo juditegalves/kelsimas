@@ -81,8 +81,8 @@ html[data-lang="pt"] [data-en] { display: none; }
 
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: start; }
 .pair .project-visual { aspect-ratio: 4 / 3.4; display: grid; place-items: center; overflow: hidden; }
-.pair .project-visual img { width: 100%; height: 100%; object-fit: contain; }
-.mock img { padding: 8%; }
+.pair .project-visual > img { width: 100%; height: 100%; object-fit: contain; }
+
 
 .project-feature { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gap); align-items: end; }
 .project-feature .project-visual { margin: 0; }
@@ -142,4 +142,66 @@ html[data-lang="pt"] [data-en] { display: none; }
   .top { flex-wrap: wrap; gap: .6rem 1.25rem; }
   .top nav { order: 3; width: 100%; }
   .itt-sketches .slot { min-height: 12rem; }
+}
+
+/* ---------- mockups ---------- */
+.mock-book, .mock-cal, .mock-logo {
+  position: relative;
+  background: radial-gradient(120% 90% at 50% 20%, #f4f4f1 0%, #e2e2dd 70%, #d6d6d0 100%);
+}
+
+/* book: cover on a 3D block with spine, page edge and floor shadow */
+.mock-book { perspective: 1600px; }
+.book {
+  position: relative; width: 46%; aspect-ratio: 0.66;
+  transform: rotateY(-24deg) rotateX(4deg);
+  transform-style: preserve-3d;
+  box-shadow: 24px 30px 40px -12px rgba(0,0,0,.45);
+}
+.book img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.book::before { /* spine highlight on the cover */
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 7%;
+  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(0,0,0,.35) 40%, rgba(255,255,255,.08) 70%, transparent);
+}
+.book::after { /* page block */
+  content: ""; position: absolute; top: 1.2%; bottom: 1.2%; right: -24px; width: 24px;
+  background: repeating-linear-gradient(90deg, #f3f1ea 0 2px, #dcd9cf 2px 3px);
+  transform: rotateY(90deg); transform-origin: left center;
+}
+
+/* calendar: two hanging sheets with wire binding */
+.mock-cal { padding-top: 4%; }
+.sheet {
+  position: absolute; width: 40%; top: 14%;
+  background: #fff; padding: 0;
+  box-shadow: 0 18px 30px -14px rgba(0,0,0,.45);
+}
+.sheet img { width: 100%; display: block; }
+.sheet::before { /* wire binding */
+  content: ""; position: absolute; left: 6%; right: 6%; top: -10px; height: 18px;
+  background: radial-gradient(circle at 50% 60%, transparent 4px, #555 4.5px 6px, transparent 6.5px) 0 0 / 14px 18px repeat-x;
+}
+.sheet-back { left: 16%; transform: rotate(-5deg); filter: brightness(.94); }
+.sheet-front { left: 42%; transform: rotate(3deg); }
+
+/* logo: enamel sign + day pass */
+.sign-plate {
+  position: absolute; left: 8%; top: 14%; width: 58%; aspect-ratio: 1.45;
+  background: #fff; border-radius: 18px;
+  display: grid; place-items: center; padding: 6%;
+  box-shadow: 0 2px 0 #cfcfca, 0 24px 34px -16px rgba(0,0,0,.4);
+}
+.sign-plate img, .ticket img { mix-blend-mode: multiply; width: 100%; height: auto; object-fit: contain; }
+.ticket {
+  position: absolute; right: 7%; bottom: 12%; width: 30%; aspect-ratio: .5;
+  background: #f28c28; border-radius: 10px; padding: 10% 8%;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+  transform: rotate(8deg);
+  box-shadow: 0 20px 28px -14px rgba(0,0,0,.45);
+  font: 700 .85rem/1.1 var(--display); color: #fff; text-align: center;
+}
+.ticket img { background: #fff; border-radius: 6px; padding: 8%; mix-blend-mode: normal; }
+.ticket::after { /* perforation */
+  content: ""; position: absolute; left: 8%; right: 8%; bottom: 26%;
+  border-top: 2px dashed rgba(255,255,255,.7);
 }
